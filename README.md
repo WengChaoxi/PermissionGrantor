@@ -1,5 +1,9 @@
+### update 2021/1/27
+更新部分代码以兼容 Android 8.1
 
-### update 2017-07-31  
+---
+
+### update 2017-07-31 
 fix bug on XiaoMi device
 
 ### update 2017-08-08
@@ -21,12 +25,27 @@ An Android permission grant util which is concise and easy to use. Normally you 
 ```
 If you request permissions in other Class(for example in a widget), things will become complicated. Grantor handle permission in alone Activity and simplify the work, when user deny permission,  by default it's can show a dialog to explain why you need the permission, of course you can config it not to show the explaining dialog.
 ### How to use
-* 1 add to module's dependencies.
+* 1 将本项目中grantor文件夹放入需要调用此库的项目根目录下，作为子项目编译
+
+ 1) 在调用此库的项目根目录下 settings.gradle文件中include一下 ':grantor'
+```
+include ':app', ':grantor'
+```
+2) 在调用此库的项目根目录下的app目录下的build.gradle文件中的dependencies下加一行 compile project(':grantor')
 ```
 dependencies {
-      compile 'com.github.dfqin:grantor:2.5'
-}
+    // ...
+    // ...
+    compile project(':grantor')
+} 
 ```
+3) 重新载入后试试看
+
+* ~~1 add to module's dependencies.
+dependencies {
+      compile 'com.github.dfqin:grantor:2.5'
+}~~
+
 * 2 use in your code.
 ```
 PermissionsUtil.requestPermission(Context context, PermissionListener listener, String[] permissions);
@@ -62,27 +81,27 @@ private void requestCemera() {
                     } else {
                         Toast.makeText(MainActivity.this, arr.toString(), Toast.LENGTH_LONG).show();
                     }
-
+    
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-
+    
             @Override
             public void permissionDenied(@NonNull String[] permissions) {
                 Toast.makeText(MainActivity.this, "用户拒绝了读取通讯录权限", Toast.LENGTH_LONG).show();
             }
         }, new String[]{Manifest.permission.READ_CONTACTS}, true, tip);
     }
-
+    
     private void requestSms() {
-
+    
         PermissionsUtil.requestPermission(this, new PermissionListener() {
             @Override
             public void permissionGranted(@NonNull String[] permissions) {
                 Toast.makeText(MainActivity.this, "访问消息", Toast.LENGTH_LONG).show();
             }
-
+    
             @Override
             public void permissionDenied(@NonNull String[] permissions) {
                 Toast.makeText(MainActivity.this, "用户拒绝了读取消息权限", Toast.LENGTH_LONG).show();
@@ -104,3 +123,7 @@ private void requestCemera() {
 ### License
 [The MIT License (MIT)](http://opensource.org/licenses/MIT)
 Copyright (c) 2017, dfqin
+
+```
+
+```
