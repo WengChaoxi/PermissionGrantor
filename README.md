@@ -1,5 +1,5 @@
 ### update 2021/1/27
-更新部分代码以兼容 Android 8.1
+修改部分代码使得它可以在 API27，Android 8.1下被使用
 
 ---
 
@@ -18,20 +18,25 @@ set minSdkVersion to 14
 ### Grantor
 An Android permission grant util which is concise and easy to use. Normally you need to request permission in an Activity or Fragment and get the result by inheriting its method:
 ```
- public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
             @NonNull int[] grantResults) {
-        /* callback - no nothing */
-    }
+	/* callback - no nothing */
+}
 ```
 If you request permissions in other Class(for example in a widget), things will become complicated. Grantor handle permission in alone Activity and simplify the work, when user deny permission,  by default it's can show a dialog to explain why you need the permission, of course you can config it not to show the explaining dialog.
 ### How to use
-* 1 将本项目中grantor文件夹放入需要调用此库的项目根目录下，作为子项目编译
-
- 1) 在调用此库的项目根目录下 settings.gradle文件中include一下 ':grantor'
+* 1 作为子项目编译
+  1) 将本项目中grantor文件夹复制到需要 调用此库的项目 根目录下，并将grantor文件夹中的build.gradle的第二行注释掉
+```
+apply plugin: 'com.android.library'
+// apply from: '../maven-push.gradle'
+```
+  2) 在 调用此库的项目 根目录下 settings.gradle文件中include一下 ':grantor'
 ```
 include ':app', ':grantor'
 ```
-2) 在调用此库的项目根目录下的app目录下的build.gradle文件中的dependencies下加一行 compile project(':grantor')
+  3) 在 调用此库的项目 根目录下的app目录下的build.gradle文件中的dependencies下加一行 compile project(':grantor')
+
 ```
 dependencies {
     // ...
@@ -39,7 +44,7 @@ dependencies {
     compile project(':grantor')
 } 
 ```
-3) 重新载入后试试看
+  4) 重新载入一下（点Sync Now），如果有问题可尝试rebuild project试试
 
 * ~~1 add to module's dependencies.
 dependencies {
@@ -110,20 +115,6 @@ private void requestCemera() {
     }
 
 ```
-* 4 the demo image.
-
-![默认](https://github.com/dfqin/PermissionGrantor/blob/master/grant1.gif)
-
-
-![授权拒绝时自定义Dialog](https://github.com/dfqin/PermissionGrantor/blob/master/grant2.gif)
-
-
-![授权拒绝时不显示Dialog](https://github.com/dfqin/PermissionGrantor/blob/master/grant3.gif)
-
 ### License
 [The MIT License (MIT)](http://opensource.org/licenses/MIT)
 Copyright (c) 2017, dfqin
-
-```
-
-```
