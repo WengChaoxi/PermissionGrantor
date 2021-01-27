@@ -26,16 +26,18 @@ public void onRequestPermissionsResult(int requestCode, @NonNull String[] permis
 If you request permissions in other Class(for example in a widget), things will become complicated. Grantor handle permission in alone Activity and simplify the work, when user deny permission,  by default it's can show a dialog to explain why you need the permission, of course you can config it not to show the explaining dialog.
 ### How to use
 * 1 作为子项目编译
-  1) 将本项目中grantor文件夹复制到需要 调用此库的项目 根目录下，并将grantor文件夹中的build.gradle的第二行注释掉
+
+1) 将本项目中grantor文件夹复制到需要 调用此库的项目 根目录下，并将grantor文件夹中的build.gradle的第二行注释掉
+
 ```
 apply plugin: 'com.android.library'
 // apply from: '../maven-push.gradle'
 ```
-  2) 在 调用此库的项目 根目录下 settings.gradle文件中include一下 ':grantor'
+  1) 在 调用此库的项目 根目录下 settings.gradle文件中include一下 ':grantor'
 ```
 include ':app', ':grantor'
 ```
-  3) 在 调用此库的项目 根目录下的app目录下的build.gradle文件中的dependencies下加一行 compile project(':grantor')
+  2) 在 调用此库的项目 根目录下的app目录下的build.gradle文件中的dependencies下加一行 compile project(':grantor')
 
 ```
 dependencies {
@@ -44,7 +46,7 @@ dependencies {
     compile project(':grantor')
 } 
 ```
-  4) 重新载入一下（点Sync Now），如果有问题可尝试rebuild project试试
+  3) 重新载入一下（点Sync Now），如果有问题可尝试rebuild project试试
 
 * ~~1 add to module's dependencies.
 dependencies {
